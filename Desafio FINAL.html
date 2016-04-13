@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<h1> LOTERIA DO RICARDO <h1/>
+<body>
+<script>
+do {
+var mostra = function (frase) {
+	document.write(frase + "<br/>");
+	}
+var tamAposta = 6 //trocar depois pra 6
+var aposta = [];
+var Acertos = [];
+var repetido = true;
+var numSorteados =[] ;
+var numAcertos = 0;
+var proQuadra = "1/2332";
+var proQuina = "1/154.518";
+var proSena = "1/50063860";
+// Sorteio dos Numeros
+if (aposta.length <= 6){
+	for (i=0; i < tamAposta;i = i +1){
+		var sorteio = Math.round(Math.random() * 60);
+		numSorteados.push(sorteio);
+		}
+
+ }		
+ // Usuário Aposta Números
+for (i=1; i <=tamAposta; i = i+1){
+	var numEscolhido = parseInt(prompt("Escolha o " + i +" número da sua aposta!"));
+	if (numEscolhido > 0 && numEscolhido <=60 ){
+		if ( i == 1 ) {
+			aposta.push(numEscolhido);
+			mostra("Numero apostado:" + aposta);
+		}
+		else
+		{	
+			for (k = 0; (k < i); k = k+1){
+				if (aposta[k] == numEscolhido) {
+				alert("Número Repetido!");
+				repetido = false;
+				i = i -1;
+			
+				}
+			}	
+			if (repetido == true) {
+				aposta.push(numEscolhido);
+				mostra("Numero apostado:" + aposta[i-1]);
+				
+			}
+		
+		repetido = true;
+
+		}
+	}
+	else{
+	alert("Número tem de ser de 1 a 60!!");
+	i = i -1;
+	}
+}
+// Mostra os Numeros
+mostra ("<hr/> Seu Bilhete:" + aposta);
+mostra(" <hr> Números Sorteados ");
+mostra(numSorteados);
+
+//Analise do resultado
+for (i = 0; i< tamAposta; i = i +1){
+	for(j = 0 ; j< tamAposta; j = j +1){
+		if (aposta[i] == numSorteados[j]){
+		var numAcertos = numAcertos + 1;
+		Acertos.push(aposta[i]);
+		}
+	}
+}
+if (numAcertos >0){
+mostra ("<hr/> Você Acertou o(s) número(s):" + Acertos);
+	if( numAcertos == 4){
+	mostra("Você Fez a Quadra! Parabéns!!");
+	mostra("A chance de Acerto é de: " + proQuadra);
+	}
+	if( numAcertos == 5){
+	mostra("Você Fez a Quina! Parabéns!!");
+	mostra("A chance de Acerto é de: " + proQuina);
+	}
+	if( numAcertos == 6){
+	mostra("Você Fez a Sena! Parabéns!!");
+	mostra("A chance de Acerto é de: " + proSena);
+	}
+}
+else{
+mostra ("<hr/> Você não acertou nenhum número!!");
+}
+
+do {jogarDeNovo = prompt("Jogar de novo ? (S/N)");
+	if (jogarDeNovo == "S" || jogarDeNovo == "s"){
+			var jogarDeNovoTrue = true;
+			var deNovo = true;
+			
+			
+	}
+	else{
+	if (jogarDeNovo =="N" || jogarDeNovo == "n"){
+		var jogarDeNovoTrue = false;
+		var deNovo = false;
+		moztra ("tchau!");
+	}
+	}
+} while ( deNovo = false);
+
+} while (jogarDeNovoTrue == true);
+</script>
+</body>
